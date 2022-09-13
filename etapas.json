@@ -1,0 +1,13 @@
+{
+    "0": {
+        "titulo": "deputado estadual",
+        "numeros": 5,
+        "candidatos": {
+            "10333": {
+                "nome": "Altair Moraes",
+                "partido": "Republicanos",
+                "foto": "altair.jpeg"
+            }
+        }
+    }
+}
