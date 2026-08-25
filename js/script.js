@@ -6,6 +6,7 @@ const rMensagem = document.querySelector('.esquerda .rotulo.r4 .mensagem')
 const rNomeCandidato = document.querySelector('.esquerda .rotulo.r4 .nome-candidato')
 const rPartidoPolitico = document.querySelector('.esquerda .rotulo.r4 .partido-politico')
 const rRodape = document.querySelector('.tela .rodape')
+const maoDigitando = document.querySelector('.mao-digitando')
 
 const rCandidato = document.querySelector('.direita .candidato')
 
@@ -28,7 +29,7 @@ window.onload = () => {
   let btns = document.querySelectorAll('.teclado--botao')
   for (let btn of btns) {
     btn.onclick = () => {
-      clicar(btn.innerHTML)
+      clicar(btn.innerHTML, btn)
     }
   }
 
@@ -119,8 +120,20 @@ function atualizarInterface() {
 /**
  * Verifica se pode usar o teclado e atualiza o número.
  */
-function clicar(value) {
+function clicar(value, botao) {
   console.log(value)
+  let esconderMao = false
+
+  if (botao && !botao.classList.contains('especial')) {
+    const centroX = botao.offsetLeft + botao.offsetWidth / 2
+    const centroY = botao.offsetTop + botao.offsetHeight / 2
+    maoDigitando.style.left = `${centroX}px`
+    maoDigitando.style.top = `${centroY}px`
+    maoDigitando.classList.remove('toque')
+    requestAnimationFrame(() => {
+      if (!esconderMao) maoDigitando.classList.add('toque')
+    })
+  }
 
   let elNum = document.querySelector('.esquerda .rotulo.r3 .numero.pisca')
   if (elNum && ! votoEmBranco) {
@@ -132,6 +145,8 @@ function clicar(value) {
     if (proximoNumero) {
       proximoNumero.classList.add('pisca')
     } else {
+      esconderMao = true
+      maoDigitando.classList.remove('toque')
       atualizarInterface()
     }
 

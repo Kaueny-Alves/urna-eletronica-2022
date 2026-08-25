@@ -58,12 +58,34 @@ h1 {
 }
 
 .teclado {
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   padding: 1rem 0;
   border-style: outset;
   background-color: #403a3a;
+}
+.mao-digitando {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: none;
+  font-size: 5rem;
+  line-height: 1;
+  pointer-events: none;
+  transform: translate(-50%, -55%);
+}
+.mao-digitando.toque {
+  display: block;
+  animation: toque 0.45s ease-out;
+}
+@keyframes toque {
+  0% { opacity: 0; transform: translate(-50%, -25%); }
+  35% { opacity: 1; transform: translate(-50%, -55%); }
+  65% { transform: translate(-50%, -40%); }
+  100% { opacity: 0; transform: translate(-50%, -55%); }
 }
 .teclado--linha {
   display: flex;
@@ -79,7 +101,7 @@ h1 {
   border: none;
   border-radius: 4px;
   color: whitesmoke;
-  cursor: pointer;
+  cursor: none;
   box-shadow: 4px -4px 1px #222222;
 }
 .teclado--botao:active {
